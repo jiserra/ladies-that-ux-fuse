@@ -1,0 +1,49 @@
+<App>
+  <DockPanel Color="#000">
+    <!-- When you're using a DockPanel, you can "dock" elements on the screen. -->
+    <Rectangle Height="80" Color="Red" Dock="Top">
+      <Text FontSize="24" TextAlignment="Center" Color="#fff" Alignment="Center" Value="Ladies That UX" />
+    </Rectangle>
+    <Rectangle Height="60" Color="Black" Dock="Bottom" />
+
+    <!-- With a ScrollView, you only can put inside 1 element, in this case, a StackPanel -->
+    <ScrollView>
+      <StackPanel ItemSpacing="10">
+        <card CircleColor="#000" Label="Juan Serra" />
+        <card CircleColor="#f00" Label="Belinda" />
+        <card CircleColor="Purple" Label="Kathryn" />
+        <card CircleColor="Blue" Label="Jilly" />
+        <card CircleColor="Red" Label="Danielle" />
+        <card CircleColor="#EF27A1" Label="Michele" />
+      </StackPanel>
+    </ScrollView>
+
+  </DockPanel>
+
+<!-- This is a class. It can be declared anywhere -->
+  <Rectangle Height="100" Color="#fff" ux:Class="card">
+    <string ux:Property="Label" />
+    <float4 ux:Property="CircleColor" />
+    <StackPanel Orientation="Horizontal">
+
+      <Circle Width="80" Height="80" Color="{ReadProperty CircleColor}" Alignment="CenterLeft" Margin="10,0" ux:Name="Face">
+        <Tapped>
+          <Set Face.Color="Green" />
+        </Tapped>
+      </Circle>
+
+      <Text FontSize="18" TextAlignment="Left" Value="{ReadProperty Label}" Alignment="CenterLeft" Color="Red">
+        <WhilePressed>
+          <Change ScaleCard.Value="True" />
+        </WhilePressed>
+      </Text>
+    </StackPanel>
+
+    <WhileTrue ux:Name="ScaleCard">
+      <Scale Factor="0.8" Duration="0.6" Easing="BounceOut" EasingBack="BounceIn" />
+      <Change this.Color="Blue" Duration="0.2" />
+    </WhileTrue>
+
+  </Rectangle>
+
+</App>
